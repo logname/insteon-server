@@ -36,7 +36,7 @@ Insteon devices
 
 **Installation**
 
-*Insteon Server Node.js application
+*Insteon Server Node.js application*
 
 The insteon-server has been forked to make some changes in some of files to support Hubitat Elevation, and additional features. Please use files found here, rather than those from Scott Kuester's GitHub repository.
 
@@ -48,20 +48,32 @@ To install the Insteon Server Node.js application, follow these steps:
 
 **Step 3** Select the green Clone or Download button, then press **Download ZIP**
 
-**Step 4** In Raspbian or your choice of linux flavor, type *cd /usr/local/lib/node_modules/*
+**Step 4** In Raspbian or your choice of linux flavor, type
 
-**Step 5** Create the directory insteon-server inside the node_modules directory with *sudo mkdir insteon-server*
+> *cd /usr/local/lib/node_modules/*
 
-**Step 6** Type *cd /usr/local/lib/node_modules/insteon-server/* and expand the ZIP archive "insteon-server-master" to the insteon-server directory.
+**Step 5** Create the directory insteon-server inside the node_modules directory with
 
-**Step 7** Type sudo npm -g install
+> *sudo mkdir insteon-server*
+
+**Step 6** Type
+
+> *cd /usr/local/lib/node_modules/insteon-server/*
+ 
+Expand the ZIP archive "insteon-server-master" to the insteon-server directory.
+
+**Step 7** Type
+
+> sudo npm -g install
 
 **Step 8** Add the required dependencies
 Type the following to install the dependencies (you may not need *sudo*, depending on your privlidge level)
 
-*sudo npm install -g home-controller*
-*sudo npm install -g express*
-*sudo npm install -g ws*
+> *sudo npm install -g home-controller*
+
+> *sudo npm install -g express*
+
+> *sudo npm install -g ws*
 
 **Step 9** Copy the *config-example.json* file and rename it *config.json*
 
@@ -81,8 +93,13 @@ Replace all the [Insteon Device ID] in the config.json file with the actual devi
 
 **Start the server and client listener**
 
-Open a shell window (Raspbian) or terminal window (Mac OS), and type *cd /usr/local/lib/node_modules/insteon-server/*
-Start the Insteon Server node.js application by typing *node insteonserver.js*
+Open a shell window (Raspbian) or terminal window (Mac OS), and type 
+
+> *cd /usr/local/lib/node_modules/insteon-server/*
+> 
+Start the Insteon Server node.js application by typing
+
+> *node insteonserver.js*
 
 You should see the following in your shell or terminal window:
 
@@ -90,8 +107,13 @@ You should see the following in your shell or terminal window:
 Initiating websocket...
 Connected to Insteon Model 2245 Hub...**
 
-Open a second shell window (Raspbian) or terminal window (Mac OS), and again type *cd /usr/local/lib/node_modules/insteon-server/*
-Start the Insteon client listener by typing *node client.js* 
+Open a second shell window (Raspbian) or terminal window (Mac OS), and again type
+
+> *cd /usr/local/lib/node_modules/insteon-server/*
+
+Start the Insteon client listener by typing
+
+> *node client.js* 
 
 You should see the following in the client.js shell or terminal window:
 
