@@ -162,10 +162,12 @@ This can be done by sending HTTP request directly to the Insteon hub. With this,
 
 **Example:**
 
-ON group 11 (scene 1)
+> ON group 11 (scene 1)
 http://[username]:[password]@[insteon hub IP]:25105/0?1111=I=0
-OFF group 11 (scene 1)
+
+> OFF group 11 (scene 1)
 http://[username]:[password]@[insteon hub IP]:25105/0?1311=I=0
+
 Once you have the credentials and Insteon hub IP info, it's just copy past from then on. It's only the last four digits before =I=0 that change depending on the state or the scene group ID number. So in the above example, 1111 is ON for Group ID 11 and 1311 is OFF for Group ID 11
 
 **Untested**
