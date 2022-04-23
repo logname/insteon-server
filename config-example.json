@@ -81,7 +81,7 @@
           "deviceID": "[Insteon Device ID]",
           "dimmable": "yes",
           "deviceType": "scene"
-          },
+          }
           
         ]
       }
