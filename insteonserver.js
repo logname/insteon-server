@@ -16,7 +16,7 @@ var _ = require('underscore')
 
 var websocket = require('ws')
 
-var wss = new websocket.Server({port: 9595})
+var wss = new websocket.Server({port: 8080})
 
 
 
