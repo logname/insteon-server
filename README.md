@@ -219,11 +219,11 @@ You should see the following in the client.js shell or terminal window:
 WARNING: If you don't start the client.js application, you won't be able to generate the child devices, get device status updates, or use Insteon motion, contact and leak sensors.
 
 
-**Insteon WS Parent and Child device drivers**
+# Insteon WS Parent and Child device drivers
 
 Through the use of web sockets, this new driver will update status immediately, and will capture the status of Insteon input devices such as contact, motion, and leak sensors. Any periodic refresh rules used with the previous driver should be removed.
 
-**Adding the Insteon driver code to Hubitat Elevation**
+## Adding the Insteon driver code to Hubitat Elevation**
 
 Choose **Select All** on the RAW code window, then copy and paste the code into a new driver code window in Hubitat Elevation and press SAVE
 Repeat until you have added the parent and each of the child device drivers.
@@ -232,7 +232,7 @@ Repeat until you have added the parent and each of the child device drivers.
 
 **Step 2** Copy each of the child device driver code files, creating a new driver file for each on your Hubitat Elevation hub. Be sure that after you select the link for the child driver, you then press the RAW button at the top right of the driver code window. This will ensure you have all the correct code, without any missing elements or accidentally included special characters.
 
-**Installing the Insteon WS Parent driver on your Hubitat Elevation hub**
+## Installing the Insteon WS Parent driver on your Hubitat Elevation hub**
 
 **Step 1** Refer to the Hubitat Elevation device driver documentation if you have never installed a device driver before.
 
@@ -254,7 +254,7 @@ Your child device ID numbers (Insteon Device ID numbers) should all show up in t
 In your Hubitat Elevation devices list, you should see the *Insteon WS Parent* app with the name you gave it, and all of your Insteon devices with the names you assigned to each device in the config.json file.
 You may now include your Insteon devices in Hubitat Elevation automations. I have personally been running this new driver with all my Insteon devices since late June of 2019, and it continues to perform perfectly. Very fast with no issues or conflicts of any kind.
 
-**Controlling Insteon Scenes**
+# Controlling Insteon Scenes**
 
 This can be done by sending HTTP request directly to the Insteon hub. With this, you can control the ramp rate of Insteon devices per button, rule action, switch, mode change, etc.
 
@@ -280,7 +280,7 @@ Siren
 Smoke bridge
 Thermostat
 
-**How to add and remove devices from your Insteon 2245-222 hub**
+# How to add and remove devices from your Insteon 2245-222 hub
 
 Now that the ability to use the Insteon app is gone, you will need to manually add devices to the hub. There are ways to do this with open source software, but you can also do this by using the **Link** button on the 2245 hub, or by using the following HTTP commands. Even if you accidentally reset your Insteon hub, you should be able to re-link devices by using the buttons on the hub and the link method on the device, or recreate groups using the HTTP method below. If you need to configure embedded devices, or if just want a convenient configuraiton tool for you devices, I suggest Insteon Control Panel for Home Assistant by Tom Harris (which will soon be included with the Home Assistant Insteon driver) - https://community.home-assistant.io/t/insteon-control-panel/234145/41
 
