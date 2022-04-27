@@ -42,84 +42,184 @@ The insteon-server has been forked to make some changes in some of files to supp
 
 To install the Insteon Server Node.js application, follow these steps:
 
-**Step 1** Install Node.js (google search can help you with this part)
+# Raspberry Pi specific instructions
 
-**Step 2** Download the Insteon Server from this repository
+I don't use monitors with a Raspberry Pi. Never have, and never intended to. So my instructions are all how to set this up via ssh. However, if you want to run headless, you'll need further instruction then I'm providing here because the shell windows have to otherwise remain open or the insteon server and client listener applications will not continue to run.
 
-**Step 3** Select the green Clone or Download button, then press **Download ZIP**
+**Step 1** Install Raspbian Buster. If you use the latest Raspbian OS, they have removed the default pi account, so you won't be able to set this up via ssh without first attaching a. monitor and keyboard to create an account to log into ssh. And then if you're doing that, well then what's the point in using ssh to do this, right?
 
-**Step 4** In Raspbian or your choice of linux flavor, type
+**Step 2** Most sd card imaging software will automatically eject the miroSD card after writing, so remove the card from the reader and then pop it back in so it’s available to your system again. You will not see the whole volume, but you will be able to access the boot directory.
 
-> *cd /usr/local/lib/node_modules/*
+**Step 3** If you’re using a Raspberry Pi with built-in Ethernet, you don’t need to do anything to add WiFi support and you can skip to Step 5. If you’re not (e.g. A Raspberry Pi ZeroW), then you’ll need to add a wpa_supplicant.conf file. This is just a text file you create with nothing more than the text below in the file. The easiest way to do this is with Atom text editor. Just create a new file and paste the text below into it, modifying the ssid with your actual WiFi name you want the Raspberry Pi to connect to, and the psk with your WiFi password.
 
-**Step 5** Create the directory insteon-server inside the node_modules directory with
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 
-> *sudo mkdir insteon-server*
+network={
 
-**Step 6** Type
+ssid="YOUR_NETWORK_NAME"
 
-> *cd /usr/local/lib/node_modules/insteon-server/*
- 
-Expand the ZIP archive "insteon-server-master" to the insteon-server directory.
+psk="YOUR_PASSWORD"
 
-**Step 7** Type
+key_mgmt=WPA-PSK
+
+}
+
+**Step 4** Save the text file as “wpa_supplicant.conf” to the root level of the Boot directory. It will be automatically moved to the required directory when the Raspberry Pi boots.
+
+**Step 5** Add ssh capability by creating an empty file with no extension. Again you can use Atom text editor to save an empty text file named “ssh” to the root level of the boot directory on the microSD card. Another way to do this is to open a terminal app and type
+
+> cd /volumes/boot
+
+then type
+
+> touch ssh
+
+Same result. An empty file named ssh with no extension.
+
+**Step 6** Download the Insteon server file and unzip it.
+
+If you will not be using Insteon keypad, then delete the file “insteonserver.js” and instead use the file that is located in the directory labelled “insteonserver.js without Keypad support”.
+
+If you do need Insteon Keypad support, then delete the folder labelled “Insteonserver.js without Keypad support”.
+
+# Do not keep both files!
+
+**Step 7** Rename the folder “Insteon-server-master” to “Insteon-server” and then zip compress it again.
+
+**Step 8** Copy the file “Insteon-server.zip” to the root level of the microSD card.
+
+**Step 9** Close the terminal and any text editors that you have been using to add files to the microSD card, and then eject it from your computer.
+
+**Step 10** Install the micro SD card in your Raspberry Pi and plug it in.
+
+**Step 11** Ssh into the Pi
+
+> ssh pi@192.168.x.x
+
+Enter the default password
+
+> raspberry
+
+**NOTE:** It is highly recommended that you change the default password for the **pi** account. To do this type
+
+> passwd
+
+But, don't forget to write down the new password, or you'll have to start over from the beginning.
+
+**Step 12** Change to the lib directory
+
+> cd usr/local/lib
+
+**Step 13** Download node.js
+
+> curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+
+**Step 14** Install node.js
+
+> sudo apt install nodejs
+
+**Step 15** Check that node is installed and you have the version expected.
+
+> node -v
+
+**Step 16** Create the directory node_modules
+
+> sudo mkdir node_modules
+
+**Step 17** Copy the Insteon-server file you saved in the boot directory to the node_modules directory
+
+> sudo cp /boot/insteon-server.zip /usr/local/lib/node_modules
+
+**Step 18** Change to the node_modules directory
+
+> cd node_modules
+
+**TIP:** If you get lost along the way, you can check what directory level you’re currently in with
+
+> pwd
+
+To see what’s in the current directory, use
+
+> ls
+
+**Step 19** Unzip the Insteon-server archive
+
+> sudo unzip Insteon-server.zip
+
+**Step 20** Take a moment to do some clean-up and remove the .zip file you no longer need
+
+> sudo rm -R Insteon-server.zip
+
+**Step 21** Change to the Insteon-server directory
+
+> cd Insteon-server
+
+**Step 22** Install the Insteon server app
 
 > sudo npm -g install
 
-**Step 8** Add the required dependencies
-Type the following to install the dependencies (you may not need *sudo*, depending on your privlidge level)
+**Step 23** Install the dependencies
 
-> *sudo npm install -g home-controller*
+> sudo npm install -g home-controller
 
-> *sudo npm install -g express*
+> sudo npm install -g express
 
-> *sudo npm install -g ws*
+> sudo npm install -g ws
 
-**Step 9** Copy the *config-example.json* file and rename it *config.json*
+**Step 24** Edit the config-example.json file. When editing the config.json file, remove any devices you do not own. The username and password from your insteon hub **must** replace [Insteon Hub Username] and [Insteon Hub Password] in the config.json file. **Atom Text editor** is highly recommended for editing on MacOS, and **Nano** is a very easy to use editor included in the Raspbian OS.
+
+> sudo nano config-example.json
 
 **NOTE**: The Insteon hub port in the config.js file must be 25105, but the node.js **server port**, which is labelled "server_port" in the config.js file, can be any open port you need it to be. What's important is that the node.js "server_port" specified in the config.js file **must** match the server port specified in the insteonserver.js file.
 
-**Step 10** When editing the config.json file, remove any devices you do not own. The username and password from your insteon hub **must** replace [Insteon Hub Username] and [Insteon Hub Password] in the config.json file. **Atom Text editor** is highly recommended for editing on MacOS, and **Nano** is a very easy to use editor included in the Raspbian OS.
-
-**Step 11** Name the devices the way you would like them to appear in your Hubitat Elevation hub.
+Name the devices the way you would like them to appear in your Hubitat Elevation hub.
 Replace all the [Insteon Device ID] in the config.json file with the actual device ID from your Insteon mobile app (Letters and Numbers only. **Do not add periods or colons**) It is important to properly enter your Insteon Device ID numbers, as this is how the child devices will be created on the Hubitat Elevation hub. If you do not enter the Insteon Device ID for each of your devices in the config.json file, its corresponding child device will not be created on your HE hub.
 
-**Step 12** For Keypads, the device type should be "scene".
+For Keypads, the device type should be "**scene**".
 
 **NOTE**: **There is no need to change the device type from "lightbulb"**. I've been controlling multiple Instoen dimmers for years with the config.json file using "lightbulb" instead of "dimmer" regardless of whether or not it is actually a lightbulb, dimmer or switch. However, you must set "dimmable": **no** in the config.json file if the device type is a switch, a non-dimmable outlet, ON/OFF Micro Module, or an IOLinc.
 
-**Step 13** Save the config.json file
+**Step 25** Save the config.json file
 
+Press **ctrl-o**
 
-**Start the server and client listener**
+**Step 26** Change the name from config-example.json to config.json
 
-Open a shell window (Raspbian) or terminal window (Mac OS), and type 
+Press enter to confirm the name change. Nano will prompt you, asking if you want to save the file under a different name. You do, so just press
 
-> *cd /usr/local/lib/node_modules/insteon-server/*
-> 
+> y
+
+**Step 27** Exit nano
+
+> Press **ctrl-x**
+
+**Step 28** Start the server and client listener
+
+Open a shell window (Raspbian) or terminal window (Mac OS), and type
+
+> /usr/local/lib/node_modules/insteon-server/
+ 
 Start the Insteon Server node.js application by typing
-
-> *node insteonserver.js*
+node insteonserver.js
 
 You should see the following in your shell or terminal window:
 
-**Connecting to Insteon Model 2245 Hub...
-Initiating websocket...
-Connected to Insteon Model 2245 Hub...**
+**Connecting to Insteon Model 2245 Hub... Initiating websocket... Connected to Insteon Model 2245 Hub...**
 
-Open a second shell window (Raspbian) or terminal window (Mac OS), and again type
+**Step 29** Open a second shell window (Raspbian) or terminal window (Mac OS), and again type
 
-> *cd /usr/local/lib/node_modules/insteon-server/*
+cd /usr/local/lib/node_modules/insteon-server/
 
 Start the Insteon client listener by typing
 
-> *node client.js* 
+node client.js
 
 You should see the following in the client.js shell or terminal window:
 
-**Connected to Insteon Server**
+Connected to Insteon Server
 
-**WARNING**: If you don't start the client.js application, you won't be able to generate the child devices, get device status updates, or use Insteon motion, contact and leak sensors.
+WARNING: If you don't start the client.js application, you won't be able to generate the child devices, get device status updates, or use Insteon motion, contact and leak sensors.
+
 
 **Insteon WS Parent and Child device drivers**
 
@@ -130,27 +230,27 @@ You should see the following in the client.js shell or terminal window:
 Choose **Select All** on the RAW code window, then copy and paste the code into a new driver code window in Hubitat Elevation and press SAVE
 Repeat until you have added the parent and each of the child device drivers.
 
-**Step 14** Copy the parent driver by pressing the RAW button at the top right and paste it into a new driver window on Hubitat Elevation. Refer to the Hubitat docs for to to install devices drivers if you have never done this before. Be sure that after you select the link for the parent driver code, you then press the RAW button at the top right of the driver code window. This will ensure you have all the correct code, without any missing elements or accidentally included special characters.
+**Step 1** Copy the parent driver by pressing the RAW button at the top right and paste it into a new driver window on Hubitat Elevation. Refer to the Hubitat docs for to to install devices drivers if you have never done this before. Be sure that after you select the link for the parent driver code, you then press the RAW button at the top right of the driver code window. This will ensure you have all the correct code, without any missing elements or accidentally included special characters.
 
-**Step 15** Copy each of the child device driver code files, creating a new driver file for each on your Hubitat Elevation hub. Be sure that after you select the link for the child driver, you then press the RAW button at the top right of the driver code window. This will ensure you have all the correct code, without any missing elements or accidentally included special characters.
+**Step 2** Copy each of the child device driver code files, creating a new driver file for each on your Hubitat Elevation hub. Be sure that after you select the link for the child driver, you then press the RAW button at the top right of the driver code window. This will ensure you have all the correct code, without any missing elements or accidentally included special characters.
 
 **Installing the Insteon WS Parent driver on your Hubitat Elevation hub**
 
-**Step 16** Refer to the Hubitat Elevation device driver documentation if you have never installed a device driver before.
+**Step 1** Refer to the Hubitat Elevation device driver documentation if you have never installed a device driver before.
 
-**Step 17** Name your Parent device driver, and set the type to **Insteon WS Parent**
+**Step 2** Name your Parent device driver, and set the type to **Insteon WS Parent**
 
-**Step 18** Press the *Save Device* button
+**Step 3** Press the *Save Device* button
 
-**Step 19** Configure the driver as follows:
+**Step 4** Configure the driver as follows:
 
 ![Screen Shot 2019-08-12 at 11 04 28 PM](https://user-images.githubusercontent.com/9291086/164882860-fd3898c3-4a69-4247-9e92-ad7944e45a9a.png)
 
-**Step 20** Turn off "Enable debug logging". When you create a new device, debug logging is enabled by default. Some users have said that when debug logging was enabled in the parent device, the child devices were not created after completing the next steps.
+**Step 5** Turn off "Enable debug logging". When you create a new device, debug logging is enabled by default. Some users have said that when debug logging was enabled in the parent device, the child devices were not created after completing the next steps.
 
-**Step 21** Press the *Save Preferences* button, then scroll down and select the *Save Device* button again.
+**Step 6** Press the *Save Preferences* button, then scroll down and select the *Save Device* button again.
 
-**Step 22** Press the *Initialize* button. You should see **connected** under the *Current States* field. If you do not see **connected**. ensure that both the insteonserver.js application and client.js applications have been started on your node.js server.
+**Step 7** Press the *Initialize* button. You should see **connected** under the *Current States* field. If you do not see **connected**. ensure that both the insteonserver.js application and client.js applications have been started on your node.js server.
 
 Your child device ID numbers (Insteon Device ID numbers) should all show up in the State Variables field.
 In your Hubitat Elevation devices list, you should see the *Insteon WS Parent* app with the name you gave it, and all of your Insteon devices with the names you assigned to each device in the config.json file.
