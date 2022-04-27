@@ -254,7 +254,7 @@ Your child device ID numbers (Insteon Device ID numbers) should all show up in t
 In your Hubitat Elevation devices list, you should see the *Insteon WS Parent* app with the name you gave it, and all of your Insteon devices with the names you assigned to each device in the config.json file.
 You may now include your Insteon devices in Hubitat Elevation automations. I have personally been running this new driver with all my Insteon devices since late June of 2019, and it continues to perform perfectly. Very fast with no issues or conflicts of any kind.
 
-# Controlling Insteon Scenes**
+# Controlling Insteon Scenes
 
 This can be done by sending HTTP request directly to the Insteon hub. With this, you can control the ramp rate of Insteon devices per button, rule action, switch, mode change, etc.
 
