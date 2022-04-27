@@ -206,22 +206,22 @@ You should see the following in your shell or terminal window:
 
 **Step 29** Open a second shell window (Raspbian) or terminal window (Mac OS), and again type
 
-cd /usr/local/lib/node_modules/insteon-server/
+> cd /usr/local/lib/node_modules/insteon-server/
 
 Start the Insteon client listener by typing
 
-node client.js
+> node client.js
 
 You should see the following in the client.js shell or terminal window:
 
-Connected to Insteon Server
+**Connected to Insteon Server**
 
 WARNING: If you don't start the client.js application, you won't be able to generate the child devices, get device status updates, or use Insteon motion, contact and leak sensors.
 
 
 **Insteon WS Parent and Child device drivers**
 
-• Through the use of web sockets, this new driver will update status immediately, and will capture the status of Insteon input devices such as contact, motion, and leak sensors. Any periodic refresh rules used with the previous driver should be removed.
+Through the use of web sockets, this new driver will update status immediately, and will capture the status of Insteon input devices such as contact, motion, and leak sensors. Any periodic refresh rules used with the previous driver should be removed.
 
 **Adding the Insteon driver code to Hubitat Elevation**
 
