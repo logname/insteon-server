@@ -38,7 +38,7 @@ Insteon devices
 
 *Insteon Server Node.js application*
 
-The insteon-server has been forked to make some changes in some of files to support Hubitat Elevation, and additional features. Please use files found here, rather than those from Scott Kuester's GitHub repository.
+The insteon-server has been forked to make changes in some of the files to support Hubitat Elevation, and additional features. Please use files found here, rather than those from Scott Kuester's GitHub repository.
 
 To install the Insteon Server Node.js application, follow these steps:
 
