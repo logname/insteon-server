@@ -80,9 +80,7 @@ Same result. An empty file named ssh with no extension.
 
 If you will not be using Insteon keypad, then delete the file “insteonserver.js” and instead use the file that is located in the directory labelled “insteonserver.js without Keypad support”.
 
-If you do need Insteon Keypad support, then delete the folder labelled “Insteonserver.js without Keypad support”.
-
-# Do not keep both files!
+If you do need Insteon Keypad support, then delete the folder labelled “Insteonserver.js without Keypad support”. **Do not keep both files!**
 
 **Step 7** Rename the folder “Insteon-server-master” to “Insteon-server” and then zip compress it again.
 
