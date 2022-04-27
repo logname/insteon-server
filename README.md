@@ -50,7 +50,7 @@ I don't use monitors with a Raspberry Pi. Never have, and never intended to. So 
 
 **Step 2** Most sd card imaging software will automatically eject the miroSD card after writing, so remove the card from the reader and then pop it back in so it’s available to your system again. You will not see the whole volume, but you will be able to access the boot directory.
 
-**Step 3** If you’re using a Raspberry Pi with built-in Ethernet, you don’t need to do anything to add WiFi support and you can skip to Step 5. If you’re not (e.g. A Raspberry Pi ZeroW), then you’ll need to add a wpa_supplicant.conf file. This is just a text file you create with nothing more than the text below in the file. The easiest way to do this is with Atom text editor. Just create a new file and paste the text below into it, modifying the ssid with your actual WiFi name you want the Raspberry Pi to connect to, and the psk with your WiFi password.
+**Step 3** If you’re using a Raspberry Pi with built-in Ethernet, you don’t need to do anything to add WiFi support and you can skip to **Step 5**. If you’re not (e.g. A Raspberry Pi ZeroW), then you’ll need to add a wpa_supplicant.conf file. This is just a text file you create with nothing more than the text below in the file. The easiest way to do this is with Atom text editor. Just create a new file and paste the text below into it, modifying the ssid with your actual WiFi name you want the Raspberry Pi to connect to, and the psk with your WiFi password.
 
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 
