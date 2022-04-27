@@ -90,7 +90,7 @@ If you do need Insteon Keypad support, then delete the folder labelled “Insteo
 
 **Step 10** Install the micro SD card in your Raspberry Pi and plug it in.
 
-**Step 11** Ssh into the Pi
+**Step 11** ssh into the Raspberry Pi
 
 > ssh pi@192.168.x.x
 
