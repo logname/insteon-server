@@ -230,7 +230,7 @@ Repeat until you have added the parent and each of the child device drivers.
 
 **Step 1** Copy the parent driver by pressing the RAW button at the top right and paste it into a new driver window on Hubitat Elevation. Refer to the Hubitat docs for to to install devices drivers if you have never done this before. Be sure that after you select the link for the parent driver code, you then press the RAW button at the top right of the driver code window. This will ensure you have all the correct code, without any missing elements or accidentally included special characters.
 
-**Step 2** Copy each of the child device driver code files, creating a new driver file for each on your Hubitat Elevation hub. Be sure that after you select the link for the child driver, you then press the RAW button at the top right of the driver code window. This will ensure you have all the correct code, without any missing elements or accidentally included special characters.
+**Step 2** Copy each of the [child device driver code files](https://github.com/logname/Insteon-Hubitat), creating a new driver file for each on your Hubitat Elevation hub. Be sure that after you select the link for the child driver, you then press the RAW button at the top right of the driver code window. This will ensure you have all the correct code, without any missing elements or accidentally included special characters.
 
 ## Installing the Insteon WS Parent driver on your Hubitat Elevation hub**
 
